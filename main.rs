@@ -4,7 +4,7 @@ use rand::rngs::mock::StepRng;
 
 
 fn shuffle () -> Vec<i32>{
-    let mut rng = StepRng::new(2, 13);
+    let mut rng = StepRng::new(3, 11);
     let mut irs = Irs::default();
 
     let mut shuffled_deck = vec![1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13];
@@ -66,7 +66,6 @@ fn play (mut p1_hand: Vec<i32>,mut p2_hand: Vec<i32>) {
 
                 num_wars_waged += 1;
 
-                //TODO debug multiple sequential war case
                 println!("Num_wars_waged {:?}", num_wars_waged);
 
 
@@ -76,7 +75,7 @@ fn play (mut p1_hand: Vec<i32>,mut p2_hand: Vec<i32>) {
                         p2_hand.push(p1_hand.remove(0));
                         break;
                     }
-                    p1_waged_cards += p1_war_card - 1;
+                    p1_waged_cards += (3)-((5 + (4*(num_wars_waged-1)))-(p1_hand.len()as usize));
                     println!("WAR >> Player 1 has placed {:?} card(s) faced down in total and draws a {:?}", p1_waged_cards, p1_hand[(p1_war_card) as usize]);
 
                 } else {
@@ -91,7 +90,7 @@ fn play (mut p1_hand: Vec<i32>,mut p2_hand: Vec<i32>) {
                         p1_hand.push(p2_hand.remove(0));
                         break;
                     }
-                     p2_waged_cards += p2_war_card - 1;
+                     p2_waged_cards += (3)-((5 + (4*(num_wars_waged-1)))-(p2_hand.len()as usize));
                     println!("WAR >> Player 2 has placed {:?} card(s) faced down in total and and draws a {:?}",p2_waged_cards ,p2_hand[(p2_war_card) as usize]);
 
                 } else {
